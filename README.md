@@ -1,0 +1,13 @@
+# Blog
+
+Create a blog with nuxt.
+
+## Setup
+
+- Add `@nuxtjs/blog` dependency using yarn or npm to your project
+- Add `@nuxtjs/blog` module to `nuxt.config.js`:
+  ``` js
+  modules: [{
+      src: '@nuxtjs/blog',
+  }]
+  ```
