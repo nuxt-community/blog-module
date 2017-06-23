@@ -10,6 +10,6 @@ Create a blog with nuxt.
 - Add `@nuxtjs/blog` module to `nuxt.config.js`:
   ``` js
   modules: [{
-      src: '@nuxtjs/blog',
+      src: 'nuxtjs-blog',
   }]
   ```
