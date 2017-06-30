@@ -1,25 +1,22 @@
 import { formatDate } from './filters'
-import { api } from '../helpers/api'
+import { api } from './api'
 
 export default {
-  name: 'BlogIndex',
+  name: 'CollectionPage',
 
   async asyncData(context) {
     const { params, payload, app } = context
 
     if (typeof (payload) === 'object' && payload) {
-      console.log('   Using payload.')
-      return { page: payload }
+      return { collection: payload }
     }
 
-    const { data: page } = await api(`/blog/${params.page || 1}`, app)
-
-    return { page }
+    return { collection: await api(process.env.__NUXT_BLOG__.templates.collection, params, app) }
   },
 
   computed: {
     articles() {
-      return (this.page && this.page.data) || []
+      return this.collection ? this.collection.articles : []
     }
   },
 

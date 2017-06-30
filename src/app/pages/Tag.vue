@@ -5,29 +5,31 @@
       <header>
         <small class="tag-links">
           <small class="text-uppercase">
-            <nuxt-link :to="{ name: 'blog.index' }">Back to blog</nuxt-link>
+            <nuxt-link :to="{ name: '@nuxtjs/blog:index' }">Back to blog</nuxt-link>
           </small>
         </small>
         <h1 class="tag-header">{{ tag.name }}</h1>
       </header>
 
-      <article v-for="article in articles" :key="article.id">
-        <router-link :to="{ name: 'blog.article', params: { slug: article.id } }">{{ article.attributes.title }}</router-link>
-        <div class="blog-index-meta">
-          <time :datatime="article.attributes.date">{{ article.attributes.date | formatDate }}</time>
-        </div>
-        <p>{{ article.attributes.description }}</p>
-      </article>
+      <ArticlePreview v-for="article in articles"
+                      :key="article.id"
+                      :id="article.id"
+                      :title="article.title"
+                      :description="article.description"
+                      :published_at="article.published_at"
+      />
     </div>
   </div>
 </div>
 </template>
 
 <script>
-import TagPage from '../mixins/tagPage'
+import TagPage from '../mixins/tag'
+import ArticlePreview from '../components/Article.vue'
 
 export default {
-  extends: TagPage
+  extends: TagPage,
+  components: { ArticlePreview }
 }
 </script>
 

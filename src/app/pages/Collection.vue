@@ -5,29 +5,31 @@
       <header>
         <small class="collection-links">
           <small class="text-uppercase">
-            <nuxt-link :to="{ name: 'blog.index' }">Back to blog</nuxt-link>
+            <nuxt-link :to="{ name: '@nuxtjs/blog:index' }">Back to blog</nuxt-link>
           </small>
         </small>
         <h1 class="collection-header">{{ collection.name }}</h1>
       </header>
 
-      <article v-for="article in articles" :key="article.id">
-        <router-link :to="{ name: 'blog.article', params: { slug: article.id } }">{{ article.attributes.title }}</router-link>
-        <div class="blog-collection-index-meta">
-          <time :datatime="article.attributes.date">{{ article.attributes.date | formatDate }}</time>
-        </div>
-        <p>{{ article.attributes.description }}</p>
-      </article>
+      <ArticlePreview v-for="article in articles"
+                      :key="article.id"
+                      :id="article.id"
+                      :title="article.title"
+                      :description="article.description"
+                      :published_at="article.published_at"
+      />
     </div>
   </div>
 </div>
 </template>
 
 <script>
-import collectionPage from '../mixins/collectionPage'
+import CollectionPage from '../mixins/collection'
+import ArticlePreview from '../components/Article.vue'
 
 export default {
-  extends: collectionPage
+  extends: CollectionPage,
+  components: { ArticlePreview }
 }
 </script>
 
@@ -38,6 +40,7 @@ export default {
   display: block;
   text-align: right;
 }
+
 .blog-collection-index-meta {
   opacity: .75;
   font-size: .75rem;

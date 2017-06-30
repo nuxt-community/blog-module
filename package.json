@@ -1,32 +1,48 @@
 {
-    "name": "nuxtjs-blog",
-    "version": "0.0.0",
-    "description": "Build a nuxt blog",
-    "main": "./src/index.js",
-    "repository": "https://github.com/znck/nuxt-blog",
-    "author": "Rahul Kadyan <hi@znck.me>",
-    "license": "MIT",
-    "scripts": {
-        "lint": "eslint --ext .vue,.js,.json .",
-        "lint:fix": "eslint --fix --ext .vue,.js,.json .",
-        "precommit": "yarn run lint"
-    },
-    "dependencies": {
-        "chalk": "^1.1.3",
-        "express": "^4.15.3",
-        "extend-options": "^0.0.1",
-        "front-matter": "^2.1.2",
-        "marked": "^0.3.6",
-        "pify": "^3.0.0",
-        "prismjs": "^1.6.0",
-        "slugify": "^1.1.0"
-    },
-    "devDependencies": {
-        "babel-preset-vue-app": "^1.2.0",
-        "eslint": "^3.19.0",
-        "eslint-config-vue-app": "^1.3.3",
-        "eslint-plugin-json": "^1.2.0",
-        "rollup": "^0.42.0",
-        "rollup-plugin-vue": "^2.4.0"
-    }
+  "name": "@nuxtjs/blog",
+  "version": "0.0.0",
+  "description": "Build a nuxt blog",
+  "main": "./dist/blog-module.js",
+  "module": "./src/index.js",
+  "jsnext:main": "./src/index.js",
+  "repository": "https://github.com/nuxt-community/blog-module",
+  "author": "Rahul Kadyan <hi@znck.me>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --ext .vue,.js,.json .",
+    "lint:fix": "eslint --fix --ext .vue,.js,.json .",
+    "precommit": "yarn run lint",
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "chalk": "^1.1.3",
+    "cheerio": "^1.0.0-rc.1",
+    "express": "^4.15.3",
+    "flat": "^2.0.1",
+    "front-matter": "^2.1.2",
+    "glob": "latest",
+    "markdown-it": "^8.3.1",
+    "merge-options": "^1.0.0",
+    "pify": "^3.0.0",
+    "prismjs": "^1.6.0",
+    "slug": "^0.9.1",
+    "vue-disqus": "^2.0.3",
+    "webpack": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-preset-vue-app": "^1.2.0",
+    "eslint": "^3.19.0",
+    "eslint-config-vue-app": "^1.3.3",
+    "eslint-plugin-json": "^1.2.0",
+    "rollup": "^0.42.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  }
 }

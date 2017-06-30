@@ -1,14 +1,24 @@
 <template>
-  <router-link class="tag" :class="[`tag-${slug}`]" :to="url">
-    {{ name }}
-  </router-link>
+<nuxt-link class="tag"
+             :class="[`tag-${id}`]"
+             :to="{ name: '@nuxtjs/blog:tag', params: { id } }"
+>{{ name }}</nuxt-link>
 </template>
 
 <script>
-import Tag from '../mixins/tag'
-
 export default {
-  extends: Tag
+  name: 'Tag',
+
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 
