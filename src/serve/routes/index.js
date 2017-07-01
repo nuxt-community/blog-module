@@ -28,7 +28,7 @@ export default function (router, context, options) {
     const url = request(format(templates.article, req.params))
 
     if (dev()) {
-      blog.create(options, true).then(() => sendJson(blog.findArticle(req.params), res))
+      blog.create(options, true).then(() => sendJson(blog.addPaginationLinks(blog.findArticle(req.params)), res))
       return
     }
 

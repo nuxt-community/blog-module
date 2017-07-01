@@ -10,7 +10,7 @@ export function makeResource(object) {
 }
 
 export function defineOptions(options, context) {
-  const flattened = flat(options)
+  const flattened = flat(Object.assign({}, options))
   const define = {}
   Object.keys(flattened).forEach(key => {
     define[`process.env.__NUXT_BLOG__.${key}`] = JSON.stringify(flattened[key])

@@ -12,7 +12,7 @@ export default function NuxtModule(options) {
   const defaults = {
     base: 'http://localhost:3000',
     comments: false,
-    static: false,
+    static: true,
     dir: 'blog',
     api: {
       prefix: 'api/blog'
@@ -34,7 +34,13 @@ export default function NuxtModule(options) {
     },
     twitter: null,
     og: null,
-    fb: null
+    fb: null,
+    markdown: {
+      plugins: [
+        require('markdown-it-decorate'),
+        require('markdown-it-emoji')
+      ]
+    }
   }
 
   options = merge(defaults, options, { static: this.nuxt.dev ? false : options.static })

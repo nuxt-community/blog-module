@@ -25,6 +25,7 @@ export default {
     'cheerio',
     'webpack',
     'express',
-    'babel-polyfill'
+    'babel-polyfill',
+    'chalk'
   ]
 }

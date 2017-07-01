@@ -83,8 +83,8 @@ export default class Article {
     this.published_at = this.attributes.date
     this.updated_at = this.attributes.updated_at
     this.year = this.published_at.getFullYear()
-    this.month = this.published_at.getUTCMonth()
-    this.day = this.published_at.getDate()
+    this.month = this.published_at.getUTCMonth() + 1
+    this.day = this.published_at.getDate() + 1
     /* eslint-enable camelcase */
 
     return this
@@ -128,14 +128,14 @@ export default class Article {
    * @private
    */
   _createMarkdownRenderer(options: Object, blog: Blog) {
-    const plugins = options.plugins || []
-    if ('plugins' in options) delete options.plugins
+    const plugins = options.markdown.plugins || []
+    if ('plugins' in options.markdown) delete options.markdown.plugins
 
     const marked = new Markdown({
       html: true,
       linkify: true,
       breaks: true,
-      ...options,
+      ...options.markdown,
       highlight: (code, lang) => {
         if (!this.highlightedLanguages.includes(lang)) {
           this.highlightedLanguages.push(lang)
@@ -150,7 +150,7 @@ export default class Article {
     })
 
     Array.isArray(plugins) && plugins.forEach(
-        plugin => marked.use(typeof (plugin) === 'string' ? require(plugin) : plugin)
+        plugin => marked.use(plugin)
     )
 
     return marked
