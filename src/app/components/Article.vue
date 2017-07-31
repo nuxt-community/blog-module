@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .nuxt-blog-article-preview {
   margin-bottom: 15px;
 }

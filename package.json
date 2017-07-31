@@ -48,5 +48,8 @@
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "sass-loader": "^6.0.6"
+  },
+  "peerDependencies": {
+    "@nuxtjs/axios": "^2.1.0"
   }
 }

@@ -55,6 +55,8 @@ export default function NuxtModule(options) {
   serve(this, options)
   // Register build process.
   build(this, options)
+  // Register layout.
+  // this.
 }
 
 NuxtModule.meta = meta

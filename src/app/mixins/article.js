@@ -29,7 +29,7 @@ export default {
       link.push({
         rel: 'stylesheet',
         href: `//unpkg.com/prismjs/themes/prism${this.article.attributes.highlight ?
-            '-' + this.article.attributes.highlight : ''}.css`
+          '-' + this.article.attributes.highlight : ''}.css`
       })
     }
 
@@ -98,8 +98,8 @@ export default {
     },
     comments() {
       return ('comments' in this.article.attributes) ?
-          this.article.attributes.comments :
-          process.env.__NUXT_BLOG__.comments
+        this.article.attributes.comments :
+        process.env.__NUXT_BLOG__.comments
     }
   }
 }
