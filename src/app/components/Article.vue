@@ -1,7 +1,7 @@
 <template>
 <article :class="$style.preview">
   <router-link
-      :to="{ name: '@nuxtjs/blog:article', params: { id } }"
+      :to="{ name: '@nuxtjs/blog:article', params: Object.assign({ id }, $attrs) }"
   >{{ title }}</router-link>
   <div :class="$style.meta">
     <time :datatime="published_at">{{ published_at | formatDate }}</time>

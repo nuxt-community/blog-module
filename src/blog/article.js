@@ -10,6 +10,8 @@ import Blog from './blog'
 import Tag from './tag'
 import Collection from './collection'
 
+const ucword = any => any.replace(/[-_]+/g, ' ').replace(/(?:^|\s)([a-z])/g, m => m.toUpperCase())
+
 export default class Article {
   id: string
   title: string
@@ -71,12 +73,16 @@ export default class Article {
     if (this.attributes.collection) {
       this._collection = blog.getCollection(this.attributes.collection)
       this.attributes.collection = this._collection
+    } else if (path.dirname(this.filename) !== options.path) {
+      this._collection = blog.getCollection(ucword(path.basename(path.dirname(this.filename))))
+      this.attributes.collection = this._collection
     }
     this._tags = this.attributes.tags.map(tag => blog.getTag(tag))
     this.attributes.tags = this._tags
 
+    this.id = `${this.id}-${this.attributes.date.getTime()}`
     this.title = attributes.title
-    this.description = attributes.description
+    this.description = attributes.description || ''
     this.photo = attributes.photo
     this.keywords = this.attributes.tags.map(tag => tag.name)
     /* eslint-disable camelcase */
@@ -113,6 +119,8 @@ export default class Article {
   get preview() {
     return {
       id: this.id,
+      slug: this.slug,
+      collection: this.collection && this.collection.id,
       title: this.title,
       description: this.description,
       photo: this.photo,
@@ -129,7 +137,6 @@ export default class Article {
    */
   _createMarkdownRenderer(options: Object, blog: Blog) {
     const plugins = options.markdown.plugins || []
-    if ('plugins' in options.markdown) delete options.markdown.plugins
 
     const marked = new Markdown({
       html: true,
@@ -165,9 +172,14 @@ export default class Article {
   _prepareAttributes(attributes) {
     const s = cheer.load(this.rendered)
     const stats = fs.statSync(this.filename)
+    const text = query => {
+      const matches = s(query)
 
-    if (!('title' in attributes)) {
-      attributes.title = s('h1').text() || s('h2').text() || s('h3').text()
+      if (matches.length) return matches.first().text()
+    }
+
+    if (!('title' in attributes) || !attributes.title) {
+      attributes.title = text('h1') || text('h2') || text('h3')
     }
 
     if (!('date' in attributes)) {
@@ -180,19 +192,18 @@ export default class Article {
       attributes.updated_at = new Date(stats.mtime) // eslint-disable-line camelcase
     }
 
+    attributes.updated_at = new Date(attributes.updated_at)
+
     attributes.updated_at = new Date(attributes.updated_at) // eslint-disable-line camelcase
 
-    if (!('description' in attributes)) {
-      attributes.description = s('p').text()
+    if (!('description' in attributes) || !attributes.description) {
+      attributes.description = text('p')
     }
 
     if (!('tags' in attributes)) {
       attributes.tags = []
-    }
-
-    if (!('collection' in attributes)) {
-      // const dir = path.dirname(this.filename)
-      attributes.collection = null
+    } else if (!Array.isArray(attributes.tags)) {
+      attributes.tags = [attributes.tags]
     }
 
     if (!('photo' in attributes)) {

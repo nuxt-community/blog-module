@@ -17,6 +17,7 @@
                       :title="article.title"
                       :description="article.description"
                       :published_at="article.published_at"
+                      v-bind="article"
       />
     </div>
   </div>

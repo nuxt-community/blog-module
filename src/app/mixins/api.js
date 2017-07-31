@@ -13,14 +13,22 @@ export function format(template, resource) {
   return template.replace(/\/?:[^/]+/g, '').replace(/\/+/g, '/').replace(/\/$/, '')
 }
 
-export const api = async (url, params, app) => {
-  if (process.env.__NUXT_BLOG__.static) {
-    const result = await app.$axios.get(`${base}${format(`/_nuxt/${prefix}/${url}`, params)}.json`)
+async function get (url, app) {
+  if (!app || !('$axios' in app)) {
+    console.log('Use @nuxtjs/axios or axios plugin.\n' +
+    'this.$axios is requried to fetch from blog API.\n' +
+    'Falling back to fetch API. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API')
 
-    return result.data
+    return (await fetch(url)).json()
   }
 
-  const result = await app.$axios.get(`${base}${format(`/${prefix}/${url}`, params)}`)
+  return (await app.$axios.get(url)).data
+}
 
-  return result.data
+export const api = async (url, params, app) => {
+  if (process.env.__NUXT_BLOG__.static) {
+    return await get(`${base}${format(`/_nuxt/${prefix}/${url}`, params)}.json`, app)
+  }
+
+  return await get(`${base}${format(`/${prefix}/${url}`, params)}`, app)
 }

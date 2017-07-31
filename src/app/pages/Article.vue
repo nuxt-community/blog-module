@@ -33,7 +33,7 @@
 
           <div class="blog-article-tags-wrapper d-inline" v-if="article.attributes.tags">
             <TagPreview v-for="tag in article.attributes.tags"
-                        :key="tag"
+                        :key="tag.id"
                         :id="tag.id"
                         :name="tag.name"
             />

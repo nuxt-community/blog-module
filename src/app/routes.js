@@ -14,19 +14,19 @@ export const routes = [
     component: resolve('./pages/Blog.vue')
   },
   {
-    name: '@nuxtjs/blog:article',
-    path: '/blog/:id',
-    component: resolve('./pages/Article.vue')
-  },
-  {
     name: '@nuxtjs/blog:tag',
     path: '/blog/tags/:id/:page?',
     component: resolve('./pages/Tag.vue')
   },
   {
     name: '@nuxtjs/blog:collection',
-    path: '/blog/collection/:id/:page?',
+    path: '/blog/collections/:id/:page?',
     component: resolve('./pages/Collection.vue')
+  },
+  {
+    name: '@nuxtjs/blog:article',
+    path: '/blog/:collection?/:id',
+    component: resolve('./pages/Article.vue')
   }
 ]
 

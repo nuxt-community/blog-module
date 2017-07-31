@@ -18,38 +18,11 @@ export default function (router, context, options) {
 
   const templates = options.templates
   const dev = () => {
-    if (context.nuxt.dev) {
+    if (context.nuxt.options.dev) {
       console.log(`  ${chalk.blue('blog:api')} ... running in dev mode`)
       return true
     }
   }
-
-  router.get(templates.article, (req, res) => {
-    const url = request(format(templates.article, req.params))
-
-    if (dev()) {
-      blog.create(options, true).then(() => sendJson(blog.addPaginationLinks(blog.findArticle(req.params)), res))
-      return
-    }
-
-    sendFile(resolve(url))
-  })
-  router.get(templates.tag, (req, res) => {
-    const url = request(format(templates.tag, req.params))
-    if (dev()) {
-      blog.create(options, true).then(() => sendJson(blog.findTag(req.params).toPlainObject(), res))
-      return
-    }
-    sendFile(resolve(url), res)
-  })
-  router.get(templates.collection, (req, res) => {
-    const url = request(format(templates.collection, req.params))
-    if (dev()) {
-      blog.create(options, true).then(() => sendJson(blog.findCollection(req.params).toPlainObject(), res))
-      return
-    }
-    sendFile(resolve(url), res)
-  })
   router.get(templates.indexArticles, (req, res) => {
     const url = request(format(templates.indexArticles, req.params))
 
@@ -70,6 +43,14 @@ export default function (router, context, options) {
 
     sendFile(resolve(url), res)
   })
+  router.get(templates.tag, (req, res) => {
+    const url = request(format(templates.tag, req.params))
+    if (dev()) {
+      blog.create(options, true).then(() => sendJson(blog.findTag(req.params).toPlainObject(), res))
+      return
+    }
+    sendFile(resolve(url), res)
+  })
   router.get(templates.indexCollections, (req, res) => {
     const url = request(format(templates.indexCollections, req.params))
 
@@ -79,6 +60,24 @@ export default function (router, context, options) {
     }
 
     sendFile(resolve(url), res)
+  })
+  router.get(templates.collection, (req, res) => {
+    const url = request(format(templates.collection, req.params))
+    if (dev()) {
+      blog.create(options, true).then(() => sendJson(blog.findCollection(req.params).toPlainObject(), res))
+      return
+    }
+    sendFile(resolve(url), res)
+  })
+  router.get(templates.article, (req, res) => {
+    const url = request(format(templates.article, req.params))
+
+    if (dev()) {
+      blog.create(options, true).then(() => sendJson(blog.addPaginationLinks(blog.findArticle(req.params)), res))
+      return
+    }
+
+    sendFile(resolve(url))
   })
 
   console.log(`   ${chalk.blue('blog:api')} Listening on /${options.api.prefix}`)

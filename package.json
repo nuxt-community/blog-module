@@ -12,10 +12,12 @@
     "lint": "eslint --ext .vue,.js,.json .",
     "lint:fix": "eslint --fix --ext .vue,.js,.json .",
     "precommit": "yarn run lint",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "chalk": "2.0.1",
     "cheerio": "^1.0.0-rc.1",
     "express": "^4.15.3",
@@ -36,7 +38,6 @@
   },
   "devDependencies": {
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.5.2",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-vue-app": "^1.2.0",
