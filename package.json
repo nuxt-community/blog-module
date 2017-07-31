@@ -26,8 +26,10 @@
     "markdown-it-decorate": "1.2.2",
     "markdown-it-emoji": "1.4.0",
     "merge-options": "^1.0.0",
+    "node-sass": "^4.5.3",
     "pify": "^3.0.0",
     "prismjs": "^1.6.0",
+    "sass-loader": "^6.0.6",
     "slug": "^0.9.1",
     "vue-disqus": "^2.0.3",
     "webpack": "^3.0.0"
@@ -41,13 +43,11 @@
     "eslint": "4.1.1",
     "eslint-config-vue-app": "^1.3.3",
     "eslint-plugin-json": "^1.2.0",
-    "node-sass": "^4.5.3",
     "rollup": "0.43.0",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-json": "^2.3.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "sass-loader": "^6.0.6"
+    "rollup-plugin-node-resolve": "^3.0.0"
   },
   "peerDependencies": {
     "@nuxtjs/axios": "*"

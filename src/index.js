@@ -48,6 +48,7 @@ export default function NuxtModule(options) {
     static: nuxtOptions.dev ? false : options.static,
     base: nuxtOptions.dev ? options.devBase || defaults.base : options.base || ''
   })
+  options.rootDir = nuxtOptions.rootDir
   options.path = path.resolve(nuxtOptions.rootDir, options.dir)
 
   blog.context = this
