@@ -3,7 +3,7 @@ import 'babel-polyfill'
 import path from 'path'
 import merge from 'merge-options'
 import blog from './blog'
-import registerRoutes from './app/routes'
+import registerRoutes, { routes } from './app/routes'
 import serve from './serve'
 import build from './build'
 import meta from '../package.json'
@@ -25,7 +25,7 @@ export default function NuxtModule(options) {
       indexTags: '/tags',
       indexCollections: '/collections'
     },
-    routes: [],
+    routes,
     disqus: {
       url: options.base || 'http://localhost:3000',
       shortname: undefined,
@@ -42,9 +42,13 @@ export default function NuxtModule(options) {
       ]
     }
   }
+  const nuxtOptions = this.nuxt.options
 
-  options = merge(defaults, options, { static: this.nuxt.dev ? false : options.static })
-  options.path = path.resolve(this.nuxt.dir, options.dir)
+  options = merge(defaults, options, {
+    static: nuxtOptions.dev ? false : options.static,
+    base: nuxtOptions.dev ? options.devBase || defaults.base : options.base || ''
+  })
+  options.path = path.resolve(nuxtOptions.rootDir, options.dir)
 
   blog.context = this
   blog.addSource(`${options.path}/**/*.md`)

@@ -50,6 +50,6 @@
     "sass-loader": "^6.0.6"
   },
   "peerDependencies": {
-    "@nuxtjs/axios": "^2.1.0"
+    "@nuxtjs/axios": "*"
   }
 }

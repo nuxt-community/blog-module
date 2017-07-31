@@ -1,9 +1,9 @@
 <template>
-<article class="nuxt-blog-article-preview">
+<article :class="$style.preview">
   <router-link
       :to="{ name: '@nuxtjs/blog:article', params: { id } }"
   >{{ title }}</router-link>
-  <div class="nuxt-blog-article-preview-meta">
+  <div :class="$style.meta">
     <time :datatime="published_at">{{ published_at | formatDate }}</time>
   </div>
   <p>{{ description }}</p>
@@ -39,11 +39,11 @@ export default {
 }
 </script>
 
-<style scoped>
-.nuxt-blog-article-preview {
+<style module>
+.preview {
   margin-bottom: 15px;
 }
-.nuxt-blog-article-preview-meta {
+.meta {
   font-size: .75rem;
   opacity: .75;
 }
