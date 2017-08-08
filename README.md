@@ -1,5 +1,7 @@
 # Blog
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nuxt-community/blog-module.svg)](https://greenkeeper.io/)
+
 Create a blog with nuxt.
 
 ## Setup
