@@ -88,12 +88,11 @@ export default {
       }
       const article = this.article
 
-      return {
-        ...disqus,
+      return Object.assign({}, disqus, {
         identifier: article.id,
         title: article.title,
         url: `${(disqus.url || '').replace(/\/$/, '')}${this.$route.path}`
-      }
+      })
       /* eslint-enable camelcase */
     },
     comments() {
