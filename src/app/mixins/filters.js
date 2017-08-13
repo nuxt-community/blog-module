@@ -1,4 +1,4 @@
-export const formatDate = any => {
+export const formatDate = function (any) {
   const date = new Date(any)
   const months = [
     'January',
