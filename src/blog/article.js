@@ -80,7 +80,6 @@ export default class Article {
     this._tags = this.attributes.tags.map(tag => blog.getTag(tag))
     this.attributes.tags = this._tags
 
-    this.id = `${this.id}-${this.attributes.date.getTime()}`
     this.title = attributes.title
     this.description = attributes.description || ''
     this.photo = attributes.photo

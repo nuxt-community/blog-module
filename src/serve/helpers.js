@@ -16,6 +16,7 @@ export const sendJson = (content, res) => {
 
   content = JSON.stringify(content, null, 2)
   console.log(`  ${chalk.blue('blog:api')} ${chalk.green('application/json')}`)
+  console.log(`  ${chalk.blue('blog:api')} ${JSON.stringify(content).substr(0, 40)}...}`)
   res.setHeader('Content-Type', 'application/json')
   res.end(content, 'utf-8')
 }
