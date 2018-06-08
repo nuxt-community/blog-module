@@ -1,6 +1,6 @@
 {
   "name": "@nuxtjs/blog",
-  "version": "0.0.1-7",
+  "version": "0.0.1-6",
   "description": "Build a nuxt blog",
   "main": "./dist/blog-module.js",
   "module": "./src/index.js",
