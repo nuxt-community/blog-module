@@ -15,7 +15,13 @@ export default {
 
   computed: {
     articles() {
-      return this.page || []
+      return (
+        this.page.sort((a, b) => {
+          const pageA = new Date(a.published_at)
+          const pageB = new Date(b.published_at)
+          return pageB - pageA
+        }) || []
+      )
     }
   }
 }
