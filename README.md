@@ -1,15 +1,23 @@
 # Blog
 
-Create a blog with nuxt.
+Create a blog with nuxt. This is a forked version of https://github.com/nuxt-community/blog-module
+
+**NOTE** `@nuxtjs/axios` is a peer dependency
+
+## Installation
+
+`yarn add @nuxtjs/axios nuxt-blog-module`
+
+or
+
+`npm install @nuxtjs/axios nuxt-blog-module`
 
 ## Setup
 
-- Add `@nuxtjs/blog` dependency using yarn or npm to your project
-- Add `@nuxtjs/blog` module to `nuxt.config.js`:
+- Add `nuxt-blog-module` and `@nuxtjs/axios` modules to `nuxt.config.js`:
+
   ``` js
-  modules: [{
-      src: '@nuxtjs/blog',
-  }]
+  modules: ['@nuxtjs/axios', 'nuxt-blog-module']
   ```
 
 ## Usage

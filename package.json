@@ -1,12 +1,12 @@
 {
-  "name": "@nuxtjs/blog",
-  "version": "0.0.1-6",
+  "name": "nuxt-blog-module",
+  "version": "0.0.1-8",
   "description": "Build a nuxt blog",
   "main": "./dist/blog-module.js",
   "module": "./src/index.js",
   "jsnext:main": "./src/index.js",
-  "repository": "https://github.com/nuxt-community/blog-module",
-  "author": "Rahul Kadyan <hi@znck.me>",
+  "repository": "https://github.com/SeanGroff/blog-module",
+  "author": "Sean Groff <sgroff04@gmail.com>",
   "license": "MIT",
   "scripts": {
     "lint": "eslint --ext .vue,.js,.json .",
