@@ -27,7 +27,8 @@ async function get (url, app) {
 
 export const api = async (url, params, app) => {
   if (process.env.__NUXT_BLOG__.static) {
-    return await get(`${base}${format(`/_nuxt/${prefix}/${url}`, params)}.json`, app)
+    let publicPath = process.env.__NUXT_BLOG__.publicPath
+    return await get(`${base}${format(`/${publicPath}/${prefix}/${url}`, params)}.json`, app)
   }
 
   return await get(`${base}${format(`/${prefix}/${url}`, params)}`, app)

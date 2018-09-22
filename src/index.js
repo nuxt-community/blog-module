@@ -11,6 +11,7 @@ import meta from '../package.json'
 export default function NuxtModule(options) {
   const defaults = {
     base: 'http://localhost:3000',
+    publicPath: '/_nuxt/',
     comments: false,
     static: true,
     dir: 'blog',
@@ -45,7 +46,8 @@ export default function NuxtModule(options) {
   const nuxtOptions = this.nuxt.options
 
   options = merge(defaults, options, {
-    static: nuxtOptions.dev ? false : options.static,
+    publicPath: (nuxtOptions.build || {}).publicPath || defaults.publicPath,
+    static: nuxtOptions.dev ? defaults.static : (options.static === true),
     base: nuxtOptions.dev ? options.devBase || defaults.base : options.base || ''
   })
   options.rootDir = nuxtOptions.rootDir
