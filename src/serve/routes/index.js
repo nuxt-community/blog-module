@@ -77,7 +77,7 @@ export default function (router, context, options) {
       return
     }
 
-    sendFile(resolve(url))
+    sendFile(resolve(url), res)
   })
 
   console.log(`   ${chalk.blue('blog:api')} Listening on /${options.api.prefix}`)
