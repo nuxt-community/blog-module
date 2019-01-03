@@ -6,36 +6,11 @@ import Prism from 'prismjs'
 import path from 'path'
 import slug from 'slug'
 import cheer from 'cheerio'
-import Blog from './blog'
-import Tag from './tag'
-import Collection from './collection'
 
 const ucword = any => any.replace(/[-_]+/g, ' ').replace(/(?:^|\s)([a-z])/g, m => m.toUpperCase())
 
 export default class Article {
-  id: string
-  title: string
-  description: string
-  photo: string
-  keywords: string[]
-  year: number
-  month: number
-  day: number
-  slug: number
-  published_at: Date // eslint-disable-line camelcase
-  updated_at: Date // eslint-disable-line camelcase
-  source: string
-  rendered: string
-  attributes: Object
-  highlightedLanguages: string
-  /** @private */
-  filename: string
-  _tags: Tag[]
-  _collection: Collection | null
-
-  /** @namespace blog.__markdown */
-
-  constructor(filename: string) {
+  constructor (filename) {
     Object.defineProperties(this, {
       filename: { value: filename },
       _tags: { value: [], writable: true },
@@ -46,7 +21,7 @@ export default class Article {
     this.highlightedLanguages = []
   }
 
-  static async create(filename, options, blog) {
+  static async create (filename, options, blog) {
     const article = new Article(filename)
 
     await article.create(options, blog)
@@ -60,7 +35,7 @@ export default class Article {
    * @param blog
    * @returns {Promise.<Article>}
    */
-  async create(options: Object, blog: Blog) {
+  async create (options, blog) {
     const marked = this._createMarkdownRenderer(options, blog)
 
     this.source = await pify(fs.readFile)(this.filename, { encoding: 'utf-8' })
@@ -73,7 +48,8 @@ export default class Article {
     if (this.attributes.collection) {
       this._collection = blog.getCollection(this.attributes.collection)
       this.attributes.collection = this._collection
-    } else if (path.dirname(this.filename) !== options.path) {
+    }
+    else if (path.dirname(this.filename) !== options.path) {
       this._collection = blog.getCollection(ucword(path.basename(path.dirname(this.filename))))
       this.attributes.collection = this._collection
     }
@@ -99,7 +75,7 @@ export default class Article {
    * Tags/Categories, the article belongs to
    * @returns {Tag[]}
    */
-  get tags(): Tag[] {
+  get tags () {
     return this._tags
   }
 
@@ -107,7 +83,7 @@ export default class Article {
    * Collection/Series, the article is part of.
    * @returns {Collection|null}
    */
-  get collection(): Collection | null {
+  get collection () {
     return this._collection
   }
 
@@ -115,7 +91,7 @@ export default class Article {
    * Minimal article info.
    * @returns {{id: string, title: string, description: string, photo: string, published_at: Date}}
    */
-  get preview() {
+  get preview () {
     return {
       id: this.id,
       slug: this.slug,
@@ -134,7 +110,7 @@ export default class Article {
    * @returns {MarkdownIt}
    * @private
    */
-  _createMarkdownRenderer(options: Object, blog: Blog) {
+  _createMarkdownRenderer (options, blog) {
     const plugins = options.markdown.plugins || []
 
     const marked = new Markdown({
@@ -156,7 +132,7 @@ export default class Article {
     })
 
     Array.isArray(plugins) && plugins.forEach(
-        plugin => marked.use(plugin)
+      plugin => marked.use(plugin)
     )
 
     return marked
@@ -168,13 +144,15 @@ export default class Article {
    * @returns {Object}
    * @private
    */
-  _prepareAttributes(attributes) {
+  _prepareAttributes (attributes) {
     const s = cheer.load(this.rendered)
     const stats = fs.statSync(this.filename)
     const text = query => {
       const matches = s(query)
 
-      if (matches.length) return matches.first().text()
+      if (matches.length) {
+        return matches.first().text()
+      }
     }
 
     if (!('title' in attributes) || !attributes.title) {
@@ -201,7 +179,8 @@ export default class Article {
 
     if (!('tags' in attributes)) {
       attributes.tags = []
-    } else if (!Array.isArray(attributes.tags)) {
+    }
+    else if (!Array.isArray(attributes.tags)) {
       attributes.tags = [attributes.tags]
     }
 

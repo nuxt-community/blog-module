@@ -1,6 +1,6 @@
 import slug from 'slug'
 
-export function format(template, resource) {
+export function format (template, resource) {
   const keys = Object.keys(resource)
 
   keys.forEach(key => {

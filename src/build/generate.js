@@ -2,7 +2,7 @@ import { routes } from '../app/routes'
 import { format } from '../helpers/path'
 import blog from '../blog'
 
-function toPlainObject(any) {
+function toPlainObject (any) {
   if (Array.isArray(any)) {
     return any.map(item => JSON.parse(JSON.stringify(item)))
   }

@@ -23,12 +23,12 @@ export const sendJson = (content, res) => {
 
 export const sendFile = (filename, res) => {
   console.log(`   Resolved file: ${filename}`)
-  fs.exists(filename, exists => {
+  fs.access(filename, exists => {
     if (exists) {
-      console.log(`   Found required file. Attempting response.`)
+      console.log('   Found required file. Attempting response.')
       fs.readFile(filename, { encoding: 'utf-8' }, (error, content) => {
         if (error) {
-          console.log(`   Failed to send response.`, error)
+          console.log('   Failed to send response.', error)
           res.statusCode = 500
           res.statusMessage = 'Internal Server Error'
           res.end(error.stack || String(error))
@@ -36,9 +36,10 @@ export const sendFile = (filename, res) => {
 
         res.setHeader('Content-Type', 'application/json')
         res.end(content, 'utf-8')
-        console.log(`   Response sent successfully.`)
+        console.log('   Response sent successfully.')
       })
-    } else {
+    }
+    else {
       return send404(res)
     }
   })

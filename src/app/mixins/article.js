@@ -4,7 +4,7 @@ import { api } from './api'
 export default {
   name: 'Article',
 
-  async asyncData(context) {
+  async asyncData (context) {
     const { params, payload, app } = context
 
     if (typeof (payload) === 'object' && payload) {
@@ -14,7 +14,7 @@ export default {
     return { article: await api(process.env.__NUXT_BLOG__.templates.article, params, app) }
   },
 
-  head() {
+  head () {
     if (!this.article) {
       return { title: '404. Not Found' }
     }
@@ -28,8 +28,8 @@ export default {
     if (this.article.highlightedLanguages.length) {
       link.push({
         rel: 'stylesheet',
-        href: `//unpkg.com/prismjs/themes/prism${this.article.attributes.highlight ?
-          '-' + this.article.attributes.highlight : ''}.css`
+        href: `//unpkg.com/prismjs/themes/prism${this.article.attributes.highlight
+          ? '-' + this.article.attributes.highlight : ''}.css`
       })
     }
 
@@ -78,7 +78,7 @@ export default {
   filters: { formatDate },
 
   computed: {
-    disqus() {
+    disqus () {
       /* eslint-disable camelcase */
       const disqus = {
         url: process.env.__NUXT_BLOG__.disqus.url,
@@ -95,10 +95,10 @@ export default {
       })
       /* eslint-enable camelcase */
     },
-    comments() {
-      return ('comments' in this.article.attributes) ?
-        this.article.attributes.comments :
-        process.env.__NUXT_BLOG__.comments
+    comments () {
+      return ('comments' in this.article.attributes)
+        ? this.article.attributes.comments
+        : process.env.__NUXT_BLOG__.comments
     }
   }
 }

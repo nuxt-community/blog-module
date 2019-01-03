@@ -6,13 +6,13 @@ import { sendFile, sendJson } from '../helpers'
 import { format } from '../../helpers/path'
 
 export default function (router, context, options) {
-  function request(url) {
+  function request (url) {
     console.log(`  ${chalk.blue('blog:api')} ${chalk.green('GET')} /${options.api.prefix}${url}`)
 
     return url
   }
 
-  function resolve(filename) {
+  function resolve (filename) {
     return path.resolve(options.distDir, `${options.api.prefix}/${filename}`.replace(/\/+/, '/').replace(/\/+$/, '') + '.json')
   }
 

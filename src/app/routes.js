@@ -1,6 +1,6 @@
 import path from 'path'
 
-const resolve = filename => path.resolve(__dirname, '../src/app', filename)
+const resolve = filename => path.resolve(__dirname, '../app', filename)
 
 export const routes = [
   {
@@ -34,7 +34,9 @@ export default function (options, router, r) {
   options.routes.forEach(route => {
     const index = routes.findIndex(r => r.name === route.name)
 
-    if (index > -1) Object.assign(routes[index], route)
+    if (index > -1) {
+      Object.assign(routes[index], route)
+    }
   })
 
   router.push(...routes.map(route => ({ ...route, component: r(route.component) })))

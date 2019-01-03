@@ -1,5 +1,3 @@
-import 'babel-polyfill'
-
 import path from 'path'
 import merge from 'merge-options'
 import blog from './blog'
@@ -8,7 +6,7 @@ import serve from './serve'
 import build from './build'
 import meta from '../package.json'
 
-export default function NuxtModule(options) {
+export default function NuxtModule (options) {
   const defaults = {
     base: 'http://localhost:3000',
     publicPath: '/_nuxt/',
