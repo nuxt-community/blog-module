@@ -3,13 +3,13 @@ import flat from 'flat'
 import blog from '../blog'
 import generate from './generate'
 
-export function makeResource(object) {
+export function makeResource (object) {
   const content = JSON.stringify(object, null, process.env.NODE_ENV === 'production' ? 0 : 2)
 
   return { source: () => content, size: () => content.length }
 }
 
-export function defineOptions(options, context) {
+export function defineOptions (options, context) {
   const flattened = flat(Object.assign({}, options))
   const define = {}
   Object.keys(flattened).forEach(key => {
@@ -18,9 +18,9 @@ export function defineOptions(options, context) {
   context.options.build.plugins.push(new DefinePlugin(define))
 }
 
-export function compileBlog(options, context) {
+export function compileBlog (options, context) {
   context.options.build.plugins.push({
-    apply(compiler) {
+    apply (compiler) {
       compiler.plugin('emit', (compilation, cb) => {
         blog.generate(options).then(files => {
           Object.keys(files).forEach(filename => {
@@ -35,15 +35,19 @@ export function compileBlog(options, context) {
   })
 }
 
-function override(options, cb) {
-  if (options.generate === undefined) options.generate = {}
+function override (options, cb) {
+  if (options.generate === undefined) {
+    options.generate = {}
+  }
   if (Array.isArray(options.generate.routes)) {
     const routes = options.generate.routes
     options.generate.routes = async () => routes.concat(await cb())
-  } else if (typeof (options.generate.routes) === 'function') {
+  }
+  else if (typeof (options.generate.routes) === 'function') {
     const original = options.generate.routes
     options.generate.routes = async (...any) => [].concat(await original(...any), await cb())
-  } else {
+  }
+  else {
     options.generate.routes = cb
   }
 }

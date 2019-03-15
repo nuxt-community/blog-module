@@ -1,7 +1,7 @@
 const base = process.env.__NUXT_BLOG__.base.replace(/\/$/, '')
 const prefix = process.env.__NUXT_BLOG__.api.prefix
 
-export function format(template, resource) {
+export function format (template, resource) {
   const keys = Object.keys(resource)
 
   keys.forEach(key => {
@@ -28,8 +28,8 @@ async function get (url, app) {
 export const api = async (url, params, app) => {
   if (process.env.__NUXT_BLOG__.static) {
     let publicPath = process.env.__NUXT_BLOG__.publicPath
-    return await get(`${base}${format(`/${publicPath}/${prefix}/${url}`, params)}.json`, app)
+    return get(`${base}${format(`/${publicPath}/${prefix}/${url}`, params)}.json`, app)
   }
 
-  return await get(`${base}${format(`/${prefix}/${url}`, params)}`, app)
+  return get(`${base}${format(`/${prefix}/${url}`, params)}`, app)
 }

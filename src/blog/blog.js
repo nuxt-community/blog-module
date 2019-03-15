@@ -7,20 +7,16 @@ import Tag from './tag'
 import Article from './article'
 import { format } from '../helpers/path'
 
-function compare(a, b) {
+function compare (a, b) {
   return Object.keys(a).every(key => a[key] === b[key])
 }
 
-function find(items, query) {
+function find (items, query) {
   return items.find(item => compare(query, item))
 }
 
 export default class Blog {
-  _articles: Container<Article>
-  _tags: Container<Tag>
-  _collections: Container<Collection>
-
-  constructor() {
+  constructor () {
     this.patterns = []
     this._articles = new Container()
     this._tags = new Container()
@@ -28,61 +24,61 @@ export default class Blog {
     this._collections = new Container()
   }
 
-  set context(context) {
+  set context (context) {
     this._context = context
   }
 
-  set options(options: Object) {
+  set options (options) {
     this._options = options
   }
 
-  get articles(): Article[] {
+  get articles () {
     return this._articles.items
   }
 
-  get tags(): Tag[] {
+  get tags () {
     return this._tags.items
   }
 
-  get collections(): Collection[] {
+  get collections () {
     return this._collections.items
   }
 
-  addSource(pattern: string) {
+  addSource (pattern) {
     this.patterns.push(pattern)
     this._dirty = true
   }
 
-  async create(options, force = false) {
+  async create (options, force = false) {
     if (this._dirty || force) {
       this._options = options
       await Promise.all(
-          this.patterns.map(async pattern => {
-            const files = await pify(glob)(pattern)
+        this.patterns.map(async pattern => {
+          const files = await pify(glob)(pattern)
 
-            await Promise.all(files.map(async filename => this._addArticle(filename)))
-          })
+          await Promise.all(files.map(async filename => this._addArticle(filename)))
+        })
       )
     }
     this._dirty = false
   }
 
-  async generate(options) {
+  async generate (options) {
     const templates = options.templates
     await this.create(options)
     const output = {}
 
-    function resolve(filename) {
+    function resolve (filename) {
       return `${options.api.prefix}/${filename}`.replace(/\/+/g, '/').replace(/\/+$/, '') + '.json'
     }
 
-    this.articles.forEach((article: Article) => {
+    this.articles.forEach((article) => {
       output[format(resolve(templates.article), article)] = this.addPaginationLinks(article)
     })
-    this.tags.forEach((tag: Tag) => {
+    this.tags.forEach((tag) => {
       output[format(resolve(templates.tag), tag)] = tag.toPlainObject()
     })
-    this.collections.forEach((collection: Collection) => {
+    this.collections.forEach((collection) => {
       output[format(resolve(templates.collection), collection)] = collection.toPlainObject()
     })
 
@@ -93,7 +89,7 @@ export default class Blog {
     return output
   }
 
-  addPaginationLinks(article: Article) {
+  addPaginationLinks (article) {
     const json = JSON.parse(JSON.stringify(article))
     const next = this.getNextArticle(article)
     const prev = this.getPrevArticle(article)
@@ -109,7 +105,7 @@ export default class Blog {
     return json
   }
 
-  async _addArticle(filename: string) {
+  async _addArticle (filename) {
     const article = await Article.create(filename, this._options, this)
 
     this._articles.addItem(article)
@@ -119,25 +115,25 @@ export default class Blog {
     return article
   }
 
-  getArticle(id: string): Article {
+  getArticle (id) {
     return this._articles.getItem(id)
   }
 
-  getNextArticle(id: string | Article): Article | null {
+  getNextArticle (id) {
     const article = typeof (id) === 'string' ? this.getArticle(id) : id
     const index = this.articles.findIndex(other => article.id === other.id)
 
     return index > 0 ? this.articles[index - 1] : null
   }
 
-  getPrevArticle(id: string | Article): Article | null {
+  getPrevArticle (id) {
     const article = typeof (id) === 'string' ? this.getArticle(id) : id
     const index = this.articles.findIndex(other => article.id === other.id)
 
     return index + 1 < this.articles.length ? this.articles[index + 1] : null
   }
 
-  getCollection(name: string): Collection {
+  getCollection (name) {
     const id = slug(name, { lower: true })
     let collection = this._collections.getItem(id)
 
@@ -149,7 +145,7 @@ export default class Blog {
     return collection
   }
 
-  getTag(name: string): Tag {
+  getTag (name) {
     const id = slug(name, { lower: true })
     let tag = this._tags.getItem(id)
 
@@ -161,15 +157,15 @@ export default class Blog {
     return tag
   }
 
-  findArticle(params) {
+  findArticle (params) {
     return find(this.articles, params)
   }
 
-  findTag(params) {
+  findTag (params) {
     return find(this.tags, params)
   }
 
-  findCollection(params) {
+  findCollection (params) {
     return find(this.collections, params)
   }
 }

@@ -3,7 +3,7 @@ import { api } from './api'
 export default {
   name: 'TagPage',
 
-  async asyncData(context) {
+  async asyncData (context) {
     const { params, payload, app } = context
 
     if (typeof (payload) === 'object' && payload) {
@@ -14,7 +14,7 @@ export default {
   },
 
   computed: {
-    articles() {
+    articles () {
       return this.tag ? this.tag.articles : []
     }
   }

@@ -1,8 +1,7 @@
 <template>
-<nuxt-link
+  <nuxt-link
     :to="{ name: '@nuxtjs/blog:collection', params: { id } }"
-    :title="`This article is part of '${name}' collection.`"
->{{ name }}</nuxt-link>
+    :title="`This article is part of '${name}' collection.`">{{ name }}</nuxt-link>
 </template>
 
 <script>

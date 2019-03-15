@@ -1,8 +1,7 @@
 <template>
-<nuxt-link
-  :class="[`tag-${id}`, $style.tag]"
-  :to="{ name: '@nuxtjs/blog:tag', params: { id } }"
->{{ name }}</nuxt-link>
+  <nuxt-link
+    :class="[`tag-${id}`, $style.tag]"
+    :to="{ name: '@nuxtjs/blog:tag', params: { id } }">{{ name }}</nuxt-link>
 </template>
 
 <script>
@@ -33,7 +32,6 @@ export default {
   color: #fff;
   background: #999;
 }
-
 
 .tag:hover, .tag:focus {
   color: #efefef;

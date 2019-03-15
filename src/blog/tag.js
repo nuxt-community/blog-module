@@ -1,15 +1,8 @@
-// @flow
 import slug from 'slug'
 import Container from './container'
-import Article from './article'
 
 export default class Tag {
-  id: string
-  name: string
-  /** @private */
-  _articles: Container
-
-  constructor(name: string) {
+  constructor (name) {
     this.id = slug(name, { lower: true })
     this.name = name
     Object.defineProperties(this, {
@@ -17,15 +10,15 @@ export default class Tag {
     })
   }
 
-  addArticle(article: Article) {
+  addArticle (article) {
     this._articles.addItem(article)
   }
 
-  get articles(): Article[] {
+  get articles () {
     return this._articles.items
   }
 
-  toPlainObject(): Object {
+  toPlainObject () {
     return { id: this.id, name: this.name, articles: this.articles.map(article => article.preview) }
   }
 }

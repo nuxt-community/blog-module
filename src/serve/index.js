@@ -5,7 +5,7 @@ import registerRotues from './routes'
 export default function (context, options) {
   const router = createRouter()
   const generateDir = (
-          context.nuxt.options.generate &&
+    context.nuxt.options.generate &&
           context.nuxt.options.generate.dir &&
           path.resolve(options.rootDir, context.nuxt.options.generate.dir)
   ) || path.resolve(options.rootDir, 'dist')
