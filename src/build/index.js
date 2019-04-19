@@ -21,12 +21,11 @@ export function defineOptions(options, context) {
 export function compileBlog(options, context) {
   context.options.build.plugins.push({
     apply(compiler) {
-      compiler.plugin('emit', (compilation, cb) => {
+      compiler.hooks.compilation.tap('emit', compilation => {
         blog.generate(options).then(files => {
           Object.keys(files).forEach(filename => {
             compilation.assets[filename] = makeResource(files[filename])
           })
-          cb()
         }).catch(exception => {
           console.log(' |> Compilation failed.', exception)
         })
