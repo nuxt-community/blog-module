@@ -2,13 +2,6 @@
 # yarn lockfile v1
 
 
-"@nuxtjs/axios@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/axios/-/axios-2.1.0.tgz#2d49e56ccaa042e48e44d9e19d1baa6e06a97af9"
-  dependencies:
-    axios "^0.16.2"
-    whatwg-url "^5.0.0"
-
 "@types/node@^6.0.46":
   version "6.0.79"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.79.tgz#5efe7d4a6d8c453c7e9eaf55d931f4a22fac5169"
@@ -217,13 +210,6 @@ aws-sign2@~0.6.0:
 aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
-
-axios@^0.16.2:
-  version "0.16.2"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.16.2.tgz#ba4f92f17167dfbab40983785454b9ac149c3c6d"
-  dependencies:
-    follow-redirects "^1.2.3"
-    is-buffer "^1.1.5"
 
 babel-code-frame@^6.22.0:
   version "6.22.0"
@@ -1275,7 +1261,7 @@ debug@2.6.7:
   dependencies:
     ms "2.0.0"
 
-debug@^2.1.1, debug@^2.2.0, debug@^2.4.5, debug@^2.6.8:
+debug@^2.1.1, debug@^2.2.0, debug@^2.6.8:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
   dependencies:
@@ -1834,12 +1820,6 @@ flat@^2.0.1:
   dependencies:
     is-buffer "~1.1.2"
 
-follow-redirects@^1.2.3:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.2.4.tgz#355e8f4d16876b43f577b0d5ce2668b9723214ea"
-  dependencies:
-    debug "^2.4.5"
-
 for-in@^0.1.3:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
@@ -1938,8 +1918,10 @@ gaze@^1.0.0:
     globule "^1.0.0"
 
 generate-function@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/generate-function/-/generate-function-2.0.0.tgz#6858fe7c0969b7d4e9093337647ac79f60dfbe74"
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/generate-function/-/generate-function-2.3.1.tgz#f069617690c10c868e73b8465746764f97c3479f"
+  dependencies:
+    is-property "^1.0.2"
 
 generate-object-property@^1.1.0:
   version "1.2.0"
@@ -2294,12 +2276,17 @@ is-module@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-module/-/is-module-1.0.0.tgz#3258fb69f78c14d5b815d664336b4cffb6441591"
 
+is-my-ip-valid@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-my-ip-valid/-/is-my-ip-valid-1.0.0.tgz#7b351b8e8edd4d3995d4d066680e664d94696824"
+
 is-my-json-valid@^2.16.0:
-  version "2.16.0"
-  resolved "https://registry.yarnpkg.com/is-my-json-valid/-/is-my-json-valid-2.16.0.tgz#f079dd9bfdae65ee2038aae8acbc86ab109e3693"
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/is-my-json-valid/-/is-my-json-valid-2.20.0.tgz#1345a6fca3e8daefc10d0fa77067f54cedafd59a"
   dependencies:
     generate-function "^2.0.0"
     generate-object-property "^1.1.0"
+    is-my-ip-valid "^1.0.0"
     jsonpointer "^4.0.0"
     xtend "^4.0.0"
 
@@ -2353,7 +2340,7 @@ is-promise@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
 
-is-property@^1.0.0:
+is-property@^1.0.0, is-property@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-property/-/is-property-1.0.2.tgz#57fe1c4e48474edd65b09911f26b1cd4095dda84"
 
@@ -3811,10 +3798,6 @@ tough-cookie@~2.3.0:
   dependencies:
     punycode "^1.4.1"
 
-tr46@~0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
-
 trim-newlines@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/trim-newlines/-/trim-newlines-1.0.0.tgz#5887966bb582a4503a41eb524f7d35011815a613"
@@ -3959,10 +3942,6 @@ watchpack@^1.3.1:
     chokidar "^1.4.3"
     graceful-fs "^4.1.2"
 
-webidl-conversions@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
-
 webpack-sources@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.0.1.tgz#c7356436a4d13123be2e2426a05d1dad9cbe65cf"
@@ -3996,13 +3975,6 @@ webpack@^3.0.0:
     watchpack "^1.3.1"
     webpack-sources "^1.0.1"
     yargs "^6.0.0"
-
-whatwg-url@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
-  dependencies:
-    tr46 "~0.0.3"
-    webidl-conversions "^3.0.0"
 
 which-module@^1.0.0:
   version "1.0.0"
